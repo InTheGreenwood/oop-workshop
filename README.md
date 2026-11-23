@@ -4,7 +4,7 @@ classDiagram
         -users: List~User~
         +AddMedia(media: Media) void
         +RemoveMedia(media: Media) void
-        +GetCollectionByType~T~() List~T~
+        +GetCollectionByType() List~T~
         +AddUser(user: User) void
         +RemoveUser(user: User) void
         +GetUsers() List~User~
@@ -167,8 +167,8 @@ classDiagram
     }
 
     %% Library Relationships
-    Library "1" o--> "0..*" Media : contains
-    Library "1" o--> "0..*" User : manages
+    Library "1" o-- "0..*" Media : contains
+    Library "1" o-- "0..*" User : manages
 
     %% User Hierarchy & Associations
     User <|-- Borrower
