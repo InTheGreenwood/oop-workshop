@@ -1,45 +1,46 @@
+```mermaid
 classDiagram
     class Library {
-        -mediaCollection: List~Media~
-        -users: List~User~
-        +AddMedia(media: Media) void
-        +RemoveMedia(media: Media) void
+        -List~Media~ mediaCollection
+        -List~User~ users
+        +AddMedia(Media media) void
+        +RemoveMedia(Media media) void
         +GetCollectionByType() List~T~
-        +AddUser(user: User) void
-        +RemoveUser(user: User) void
+        +AddUser(User user) void
+        +RemoveUser(User user) void
         +GetUsers() List~User~
     }
 
     class User {
         <<abstract>>
-        #name: String
-        #age: int
-        #ssn: String
+        #String name
+        #int age
+        #String ssn
         +UserInfo() String
     }
 
     class Borrower {
-        -borrowedMedia: List~Media~
-        +Borrow(media: Media) void
-        +Rate(media: Media, score: int) void
-        +Return(media: Media) void
+        -List~Media~ borrowedMedia
+        +Borrow(Media media) void
+        +Rate(Media media, int score) void
+        +Return(Media media) void
     }
 
     class Employee {
-        +AddMedia(library: Library, media: Media) void
-        +RemoveMedia(library: Library, media: Media) void
+        +AddMedia(Library library, Media media) void
+        +RemoveMedia(Library library, Media media) void
     }
 
     class Admin {
-        +CreateUser(library: Library, user: User) void
-        +DeleteUser(library: Library, user: User) void
-        +UpdateUser(user: User, name: String, age: int, ssn: String) void
-        +ViewUsers(library: Library) List~User~
+        +CreateUser(Library library, User user) void
+        +DeleteUser(Library library, User user) void
+        +UpdateUser(User user, String name, int age, String ssn) void
+        +ViewUsers(Library library) List~User~
     }
 
     class IRatable {
         <<interface>>
-        +Rate(score: int) void
+        +Rate(int score) void
     }
 
     class IDownloadable {
@@ -89,88 +90,86 @@ classDiagram
 
     class Media {
         <<abstract>>
-        #title: String
-        #isLoaned: bool
-        #rating: double
-        #numOfRatings: int
+        #String title
+        #bool isLoaned
+        #double rating
+        #int numOfRatings
         +Borrow() void
         +Return() void
         +Show() String
         +Download() String
-        +Rate(score: int) void
+        +Rate(int score) void
     }
 
     class Movie {
-        -director: String
-        -genre: List~String~
-        -year: int
-        -language: String
-        -duration: int
+        -String director
+        -List~String~ genre
+        -int year
+        -String language
+        -int duration
         +Watch() String
     }
 
     class App {
-        -version: String
-        -publisher: String
-        -platform: List~String~
-        -size: int
+        -String version
+        -String publisher
+        -List~String~ platform
+        -int size
         +Execute() String
     }
 
     class Ebook {
-        -author: String
-        -language: String
-        -numPages: int
-        -published: int
-        -isbn: String
+        -String author
+        -String language
+        -int numPages
+        -int published
+        -String isbn
         +View() String
         +Read() String
     }
 
     class Image {
-        -resolution: String
-        -format: String
-        -size: int
-        -date: DateTime
+        -String resolution
+        -String format
+        -int size
+        -DateTime date
         +Display() String
     }
 
     class Podcast {
-        -host: List~String~
-        -guest: List~String~
-        -year: int
-        -episodeNum: int
-        -language: String
-        -isCompleted: bool
+        -List~String~ host
+        -List~String~ guest
+        -int year
+        -int episodeNum
+        -String language
+        -bool isCompleted
         +Listen() String
         +Complete() void
     }
 
     class VideoGame {
-        -genre: String
-        -publisher: String
-        -year: int
-        -platform: List~String~
-        -isCompleted: bool
+        -String genre
+        -String publisher
+        -int year
+        -List~String~ platform
+        -bool isCompleted
         +Play() String
         +Complete() void
     }
 
     class Song {
-        -composer: String
-        -genre: String
-        -singer: String
-        -fileType: String
-        -duration: int
-        -language: String
+        -String composer
+        -String genre
+        -String singer
+        -String fileType
+        -int duration
+        -String language
         +Play() String
     }
 
-    %% Library Relationships
     Library "1" o-- "0..*" Media : contains
     Library "1" o-- "0..*" User : manages
 
-    %% User Hierarchy & Associations
     User <|-- Borrower
     User <|-- Employee
     Employee <|-- Admin
@@ -178,7 +177,6 @@ classDiagram
     Employee ..> Library : manages media in
     Admin ..> Library : manages users in
 
-    %% Media Hierarchy & Interfaces
     IRatable <|.. Media
     IDownloadable <|.. Media
 
@@ -200,3 +198,4 @@ classDiagram
     ICompletable <|.. VideoGame
     IPlayable <|.. VideoGame
     IPlayable <|.. Song
+```
