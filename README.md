@@ -1,6 +1,3 @@
-# oop-workshop
-Short exercise project for OOP course.
-
 classDiagram
     class Library {
         -mediaCollection: List~Media~
